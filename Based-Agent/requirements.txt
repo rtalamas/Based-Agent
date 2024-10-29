@@ -1,0 +1,4 @@
+cdp-sdk==0.0.2
+openai==1.52.2
+pytest==8.3.3
+cdp==0.0.2
