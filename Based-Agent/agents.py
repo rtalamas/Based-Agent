@@ -9,10 +9,20 @@ from typing import Union
 from web3 import Web3
 from web3.exceptions import ContractLogicError
 from cdp.errors import ApiError, UnsupportedAssetError
+from dotenv import load_dotenv
+# Load environment variables from .env file
+load_dotenv()
 
 # Configure the CDP SDK
 # This loads the API key from a JSON file. Make sure this file exists and contains valid credentials.
-Cdp.configure_from_json("cdp_api_key.json")  # Remove the ./Based-Agent/ prefix
+# Cdp.configure_from_json("cdp_api_key.json")  # Remove the ./Based-Agent/ prefix
+
+# Get configuration from environment variables
+API_KEY_NAME = os.environ.get("CDP_API_KEY_NAME")
+PRIVATE_KEY = os.environ.get("CDP_PRIVATE_KEY", "").replace('\\n', '\n')
+
+# Configure CDP with environment variables
+Cdp.configure(API_KEY_NAME, PRIVATE_KEY)
 
 # Create a new wallet on the Base Sepolia testnet
 # You could make this a function for the agent to create a wallet on any network
